@@ -164,8 +164,19 @@ def validate_string_unix(s, pathType=UNIX_PATH_TYPE):
         
 
 def _get_path_parts(s, pathType):
-    """ Breaks the directory string into subfolders/files """
-    return re.split(pathType['separator'], s)
+    """ 
+    Breaks the directory string into subfolders/files 
+    
+    The for loop and if/then is ment to eliminate any blank entries
+    in the tupple caused by a path name starting with a seperator or
+    double seperator.
+    """
+    output = ()
+    parts = re.split(pathType['separator'], s)
+    for p in parts:
+        if p != '':
+            output += (p,)
+    return output
     
 def _has_drive(part, pathType):
     """
@@ -213,3 +224,4 @@ def _fix_empty_string(s):
 def _fix_max_chars(s, i):
     """ Unfinished. Whats the bext way to fix this """
     pass
+
