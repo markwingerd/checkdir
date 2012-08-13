@@ -24,7 +24,7 @@ class DirectoryError(Exception):
     MAX_CHARS = 2
     INVALID_CHAR = 3
     INVALID_NAME = 4
-    
+    SEPERATOR = 5
 
 def check_string_ntfs(s, pathType=NTFS_PATH_TYPE):
     """
@@ -61,6 +61,7 @@ def check_string_ntfs(s, pathType=NTFS_PATH_TYPE):
        
     for i in range(0, len(s)):
         if ord(s[i]) < NTFS_LOWEST_VALUE: raise DirectoryError('String cannot use invalid characters', DirectoryError.INVALID_CHAR, i)
+
 
 
 def check_string_unix(s, pathType=UNIX_PATH_TYPE):
@@ -129,9 +130,9 @@ def validate_string_ntfs(s, pathType=NTFS_PATH_TYPE):
                 s = _fix_invalid_name(s,e[2])
         loopControl += 1
     return s
-    
-    
-    
+
+
+
 def validate_string_unix(s, pathType=UNIX_PATH_TYPE):
     """ 
     Checks and fixes string against UNIX file system rules.
@@ -159,9 +160,69 @@ def validate_string_unix(s, pathType=UNIX_PATH_TYPE):
             elif e[1] == DirectoryError.INVALID_NAME: 
                 s = _fix_invalid_name(s,e[2])
         loopControl += 1
-    return s        
-   
-        
+    return s
+
+
+def check_seperator_ntfs(s, pathType=NTFS_PATH_TYPE):
+    """
+    Returns blah if s has a seperator.
+
+    This is useful only for filenames. Not paths.
+    """
+    parts = re.split(pathType['separator'], s)
+    if len(parts) > 1:
+        raise DirectoryError('Filename has seperator', DirectoryError.SEPERATOR, len(parts[0]))
+
+
+def check_seperator_unix(s, pathType=UNIX_PATH_TYPE):
+    """
+    Returns blah if s has a seperator.
+
+    This is useful only for filenames. Not paths.
+    """
+    parts = re.split(pathType['separator'], s)
+    if len(parts) > 1:
+        raise DirectoryError('Filename has seperator', DirectoryError.SEPERATOR, len(parts[0]))
+
+
+def delete_seperator_ntfs(s, pathType=NTFS_PATH_TYPE):
+    """
+    Deletes the seperator in s.
+
+    ONLY GIVE THIS A FILENAME. NOT A PATH.
+    """
+    loopControl = 0
+
+    while loopControl <= 255:
+        try:
+            check_seperator_ntfs(s, pathType)
+            break
+        except DirectoryError as e:
+            if e[1] == DirectoryError.SEPERATOR:
+                s = _fix_invalid_char(s, e[2])
+        loopControl += 1
+    return s
+
+
+def delete_seperator_unix(s, pathType=UNIX_PATH_TYPE):
+    """
+    Deletes the seperator in s.
+
+    ONLY GIVE THIS A FILENAME. NOT A PATH.
+    """
+    loopControl = 0
+
+    while loopControl <= 255:
+        try:
+            check_seperator_unix(s, pathType)
+            break
+        except DirectoryError as e:
+            if e[1] == DirectoryError.SEPERATOR:
+                s = _fix_invalid_char(s, e[2])
+        loopControl += 1
+    return s
+
+
 
 def _get_path_parts(s, pathType):
     """ 
@@ -177,7 +238,7 @@ def _get_path_parts(s, pathType):
         if p != '':
             output += (p,)
     return output
-    
+
 def _has_drive(part, pathType):
     """
     Determines if the path has a drive or 'file:' (can anyone tell me 
@@ -195,13 +256,13 @@ def _has_drive(part, pathType):
     if re.match(pathType['drive'], part, flags=re.IGNORECASE): 
         return True
     return False
-    
+
 def _check_max_chars(s, maxChars):
     """ Checks to see if the string is over the max Character limit """
     if len(s) > maxChars:
         return True
     return False
-    
+
 def _is_empty(s):
     """ Returns true if s has no value """
     if len(s) <= 0:
@@ -211,17 +272,16 @@ def _is_empty(s):
 def _fix_invalid_char(s, i):
     """ Returns the string with the exlusion of the invalid char """
     return s[:i] + s[i+1:]
-    
+
 def _fix_invalid_name(s, name):
     """ Returns the string with added text behind the invalid name """
     i = s.find(name) + len(name)
     return s[:i] + 'fix' + s[i:]
-    
+
 def _fix_empty_string(s):
     """ Unfinished. Whats the best way to fix this """
     pass
-    
+
 def _fix_max_chars(s, i):
     """ Unfinished. Whats the bext way to fix this """
     pass
-
