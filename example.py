@@ -3,8 +3,8 @@
 import checkdir
 
 
-unixTest = 'file://AUX/music/Story: So & Far/Song.mp3'
-ntfsTest = 'c:\AUX\Music\O Seven: & The\Test.mp3'
+unixTest = 'file://AUX/#music/Story: So & Far/Song.mp3'
+ntfsTest = 'c:\AUX\#Music\O Seven: & The\Test.mp3'
 
 
 # validate_string_ntfs with a windows directory path would be used

@@ -13,7 +13,7 @@ NTFS_INVALID_NAME = ('AUX', 'CLOCK$', 'COM1', 'COM2', 'COM3', 'COM4',
                      'LPT8', 'LPT9', 'NUL', 'PRN')
                      
 UNIX_PATH_TYPE = { 'drive': r'file\:', 'separator': r'/+' }
-UNIX_INVALID_CHAR = re.compile(r'[<>|:&]')
+UNIX_INVALID_CHAR = re.compile(r'[<>|:&#]')
 UNIX_LOWEST_VALUE = 1
 UNIX_MAX_CHARS = 255
 UNIX_INVALID_NAME = ('')
