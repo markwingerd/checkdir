@@ -45,7 +45,7 @@ Examples
 
 Please see and run the code in examples.py
 
-LISENCE
+LICENSE
 +++++++
 Copyright (C) 2012 Mark Wingerd
 
