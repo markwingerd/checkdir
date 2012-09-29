@@ -1,3 +1,12 @@
+#   example.py  Copyright (C) 2012 Mark Wingerd
+#
+#   This program comes with ABSOLUTELY NO WARRANTY;
+#   This is free software, and you are welcome to redistribute it
+#   under certain conditions;
+#
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import checkdir
