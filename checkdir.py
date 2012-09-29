@@ -2,7 +2,7 @@
 #
 #   This program comes with ABSOLUTELY NO WARRANTY;
 #   This is free software, and you are welcome to redistribute it
-#   under certain conditions;
+#   under certain conditions; Please see the file LICENSE for detail.
 #
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
