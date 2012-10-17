@@ -230,6 +230,17 @@ def delete_seperator_unix(s, pathType=UNIX_PATH_TYPE):
     return s
 
 
+def get_pathparts(s, pathType):
+    """
+    Returns a touple of two with the path and filename.
+
+    pathtype - Required. Defines which split to use.
+
+    Returns a touple with the file path in one cell, the
+    filename in the other.
+    """
+    pass
+
 
 def _get_path_parts(s, pathType):
     """ 
