@@ -18,13 +18,15 @@ In your project import checkdir and call one of the following functions.
     delete_seperator_unix(fileName [,pathType])
     check_seperator_ntfs(fileName [,pathType])
     check_seperator_unix(fileName [,pathType])
+    split_file_and_path(dirStr, pathType)
     
     
 - dirStr is a string that should represent a directory path.
-- pathType is optional. This variable needs is required if you are 
-intending to varify a directory path obeys rules for another file
-system. e.g: You are creating a file for Linux and later plan to move
-the file to Windows.  Curent pathTypes are:
+- pathType is optional for all function except split_file_and_path. 
+This variable is required if you are intending to varify a directory 
+path obeys rules for another file system. e.g: You are creating a 
+file for Linux and later plan to move the file to Windows.  Curent 
+pathTypes are:
     
     NTFS_PATH_TYPE
     UNIX_PATH_TYPE

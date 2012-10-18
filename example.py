@@ -66,9 +66,20 @@ myPath = checkdir.validate_string_unix(myPath)
 print 'Works for Unix but not Windows:          ', myPath
 myPath = checkdir.validate_string_ntfs(myPath, pathType=checkdir.UNIX_PATH_TYPE)
 print 'This now works for both Unix and Windows:', myPath
+print '\nEND\n\n\n'
 # From here, you can call os.path.exists(myPath) and os.makedirs(myPath)
 # without worrying about any unknown errors.
 
+
+# If you wish to easily split the directory path from the file name you
+# can use the split_path_and_file function.  It requires a string with a
+# directory path/filename as well as the path types which you may recognize
+# from the examples above.
+myPath = 'file://home/MYCOMPUTER/Documents/MyText.txt'
+print 'This is the path given: ', myPath
+mySplit = checkdir.split_path_and_file(myPath, checkdir.UNIX_PATH_TYPE)
+print 'Directory Path:         ', mySplit[0]
+print 'File Name:              ', mySplit[1]
 
 
 ### check_string_**** #############################
