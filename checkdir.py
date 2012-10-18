@@ -310,9 +310,3 @@ def _fix_empty_string(s):
 def _fix_max_chars(s, i):
     """ Unfinished. Whats the bext way to fix this """
     pass
-
-
-print split_path_and_file('/home/Nagase/workspace/checkdir/checkdir.py', UNIX_PATH_TYPE)
-print split_path_and_file('/home/Nagase/workspace/checkdir/', UNIX_PATH_TYPE)
-import os
-print os.path.split('/home/Nagase/workspace/checkdir/checkdir.py')
