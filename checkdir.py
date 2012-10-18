@@ -241,6 +241,9 @@ def split_path_and_file(s, pathType):
     """
     split = _get_path_parts(s, pathType)
     fileName = split[len(split)-1]
+    # If there is no extention on fileName, assume it's a folder and
+    # delete fileNames contents.
+    if not '.' in fileName: fileName = ''
     pathName = s[0:len(s)-len(fileName)]
 
     return (pathName, fileName)
@@ -307,3 +310,7 @@ def _fix_empty_string(s):
 def _fix_max_chars(s, i):
     """ Unfinished. Whats the bext way to fix this """
     pass
+
+
+print split_path_and_file('/home/Nagase/workspace/checkdir/checkdir.py', UNIX_PATH_TYPE)
+print split_path_and_file('/home/Nagase/workspace/checkdir/', UNIX_PATH_TYPE)
